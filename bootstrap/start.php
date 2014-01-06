@@ -25,11 +25,12 @@ $app = new Illuminate\Foundation\Application;
 */
 
 
-$env = $app->detectEnvironment(function () {
-    return isset($_SERVER['LARAVEL_ENV'])
-        ? $_SERVER['LARAVEL_ENV']
-        : 'prod'; // or whatever fallback you prefer
-});
+$env = $app->detectEnvironment(array(
+
+	'local' => array('localhost'),
+	'production' => array('urlshortener.eu1.frbit.net'),
+
+));
 
 /*
 |--------------------------------------------------------------------------
