@@ -13,7 +13,7 @@ class UrlController extends BaseController {
     }
 
 	public function getIndex(){
-		dd(getenv('DB_HOST'));
+		
         $randomurl = static::get_random_url();
 		return View::make('index')->with("randomurl", $randomurl);
     }
