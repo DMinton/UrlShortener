@@ -5,9 +5,11 @@ class UrlController extends BaseController {
 	protected static function get_random_url(){
 
     	$number = DB::table('urls')->count();
-		$random = mt_rand(0,$number);
-		$randomurl = Url::find($random);
-		return $randomurl;
+    	if($number > 0){
+			$random = mt_rand(1,$number);
+			$randomurl = Url::find($random);
+			return $randomurl;
+		}
     }
 
 	public function getIndex(){
