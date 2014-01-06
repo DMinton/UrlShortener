@@ -13,4 +13,4 @@
 
 Route::get('/', 'UrlController@getIndex');
 Route::post('/', 'UrlController@postIndex');
-Route::get('/{:any}', 'UrlController@getLink');
+Route::get('{any}', 'UrlController@getLink');
