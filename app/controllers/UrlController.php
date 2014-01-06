@@ -3,9 +3,9 @@
 class UrlController extends BaseController {
 
 	protected static function get_random_url(){
-		
+
     	$number = DB::table('urls')->count();
-		$random = mt_rand(1,$number);
+		$random = mt_rand(0,$number);
 		$randomurl = Url::find($random);
 		return $randomurl;
     }
