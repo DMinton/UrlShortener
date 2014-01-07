@@ -15,11 +15,9 @@ class Url extends Eloquent {
 
 	public static function make_short_url(){
 
-		$short = base_convert(rand(10000,99999), 10, 36);
-
-		if(static::where('shortened', '=', $short)->first()){
-			return static::make_short_url();
-		}
+		do{
+			$short = base_convert(rand(10000,99999), 10, 36);
+		}while(self::where('shortened', '=', $short)->first());
 
 		return $short;
 	}
