@@ -1,10 +1,10 @@
 @if($topcount->first())
 	<div class="topcount">
-	<h4>Most Visited</h4>
+		<h4>Most Visited</h4>
 		<ul>
-		@foreach($topcount as $site)
-			<li>{{ HTML::link($site->shortened, $site->url) . " - " . $site->count }}</li>
-		@endforeach
+			@foreach($topcount as $site)
+				<li>{{ HTML::link($site->shortened, $site->url) . " - " . $site->count }}</li>
+			@endforeach
 		</ul>
 	</div>
 @endif

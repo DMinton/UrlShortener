@@ -5,9 +5,7 @@ class Url extends Eloquent {
 	protected $fillable = array('url', 'shortened');
 	public $timestamps = false;
 
-	public static $rules = array(
-		'url' => 'required|url'
-	);
+	public static $rules = array( 'url' => 'required|url' );
 
 	public static function validate($input){
 		$v = Validator::make($input ,self::$rules);
@@ -24,6 +22,5 @@ class Url extends Eloquent {
 		}
 
 		return $short;
-
 	}
 }
