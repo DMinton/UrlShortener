@@ -1,5 +1,7 @@
 @extends('layout')
 
+@include('partial._topcount')
+
 @section('container')
 	<h1>Url Shortener</h1>
 	

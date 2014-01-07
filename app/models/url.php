@@ -10,7 +10,7 @@ class Url extends Eloquent {
 	);
 
 	public static function validate($input){
-		$v = Validator::make($input ,static::$rules);
+		$v = Validator::make($input ,self::$rules);
 		if($v->fails()){ return $v; }
 		else { return true; }
 	}

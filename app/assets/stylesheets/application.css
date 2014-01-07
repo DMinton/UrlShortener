@@ -24,7 +24,7 @@
  }
 
  .container {
-	padding-top: 150px;
+	padding-top: 100px;
  }
 
 input[type=text] {
@@ -32,6 +32,18 @@ input[type=text] {
 	height: 40px;
 	font-size: 20px;
 	color: #202D44;
+}
+
+.topcount{
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	font-size: small;
+}
+
+ul {
+	text-align: left;
+	list-style: none;	
 }
 
 a {
