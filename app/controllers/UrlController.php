@@ -1,8 +1,10 @@
 <?php
 
+use lib\EloquentModelUrl;
+
 class UrlController extends BaseController {
 
-    public function __construct(Url $url) {
+    public function __construct(EloquentModelUrl $url) {
         $this->url = $url;
     }
 
