@@ -13,6 +13,26 @@ class Url extends Eloquent {
 		else { return true; }
 	}
 
+	public function getTopSites() {
+		return $this::where('count', '>', 0)
+					->take(5)
+					->orderBy('count', 'desc')
+					->get();
+	}
+
+	public function getCount() {
+		return DB::table('urls')
+					->count();
+	}
+
+	public function findUrl($random) {
+		return Url::find($random);
+	}
+
+	public function getWhere($url) {
+		return Url::where('url', '=', $url)->first();
+	}
+
 	public static function make_short_url(){
 
 		do{

@@ -2,17 +2,21 @@
 
 class UrlController extends BaseController {
 
-    protected static function get_top_sites(){
-        $topcount = Url::where('count', '>', 0)->take(5)->orderBy('count', 'desc')->get();
+    public function __construct(Url $url) {
+        $this->url = $url;
+    }
+
+    protected function get_top_sites(){
+        $topcount = $this->url->getTopSites();
         return $topcount;
     }
 
-    protected static function get_random_url(){
+    protected function get_random_url(){
 
-    	$number = DB::table('urls')->count();
+    	$number = $this->url->getCount();
     	if($number > 0){
          $random = mt_rand(1,$number);
-         $randomurl = Url::find($random);
+         $randomurl = $this->url->findUrl($random);
          return $randomurl;
         }
     }
@@ -30,22 +34,22 @@ class UrlController extends BaseController {
         $url = Input::get('url');
 
             // URL validation
-        $validation = Url::validate(array('url' => $url ));
+        $validation = $this->url->validate(array('url' => $url ));
 
         if($validation !== true){
             return Redirect::to('/')->withErrors($validation->messages());
         }
 
             // Checks if url is in table
-        $record = Url::where('url', '=', $url)->first();
+        $record = $this->url->getWhere($url);
 
         if($record){
             return View::make('result')->with('shortened', $record);
         }
 
             // adds url to table and creates shortened url
-        $newurl = Url::make_short_url();
-        $save = Url::create(array(
+        $newurl = $this->url->make_short_url();
+        $save = $this->url->create(array(
             'url' => $url,
             'shortened' => $newurl
             ));
@@ -59,7 +63,7 @@ class UrlController extends BaseController {
     public function getLink($shortened){
 
             // find query in database, increment, redirect if not found
-        $row = Url::where('shortened', '=', $shortened)->first();
+        $row = $this->url->getWhere($shortened);
         if(isset($row)){
             $row->increment('count');
         }
