@@ -2,3 +2,5 @@
 
 Just a small project I made using Laravel. The purpose was to teach myself about the Laravel framework.
 
+Link - http://urlshortener.eu1.frbit.net/
+
