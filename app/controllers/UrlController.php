@@ -18,7 +18,7 @@ class UrlController extends BaseController {
     	$number = $this->url->getCount();
     	if($number > 0){
          $random = mt_rand(1,$number);
-         $randomurl = $this->url->findUrl($random);
+         $randomurl = $this->url->findRandomUrl($random);
          return $randomurl;
         }
     }
@@ -43,8 +43,8 @@ class UrlController extends BaseController {
         }
 
             // Checks if url is in table
-        $record = $this->url->getWhere($url);
-
+        $record = $this->url->getByUrl($url);
+        
         if($record){
             return View::make('result')->with('shortened', $record);
         }
@@ -56,6 +56,7 @@ class UrlController extends BaseController {
             'shortened' => $newurl
             ));
         $save->count = 0;
+
             // return results
         if($save){
             return View::make('result')->with('shortened', $save);
@@ -63,9 +64,10 @@ class UrlController extends BaseController {
     }
 
     public function getLink($shortened){
-
+        
             // find query in database, increment, redirect if not found
-        $row = $this->url->getWhere($shortened);
+        $row = $this->url->getByUrl($shortened);
+
         if(isset($row)){
             $row->increment('count');
         }

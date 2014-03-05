@@ -17,12 +17,12 @@ class EloquentModelUrl implements UrlModelInterface {
 					->count();
 	}
 
-	public function findUrl($random) {
+	public function findRandomUrl($random) {
 		return Url::find($random);
 	}
 
-	public function getWhere($url) {
-		return Url::where('url', '=', $url)
+	public function getByUrl($url) {
+		return Url::where('shortened', '=', $url)
 					->first();
 	}
 
