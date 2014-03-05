@@ -64,7 +64,7 @@ class UrlController extends BaseController {
     }
 
     public function getLink($shortened){
-        
+
             // find query in database, increment, redirect if not found
         $row = $this->url->getByUrl($shortened);
 
