@@ -14,7 +14,7 @@
 @endsection
 
 @section('random')
-	@if(is_object($randomurl))
-	{{  HTML::link($randomurl->shortened, "Random Link") }}
+	@if(is_object($getRandomUrl))
+	{{  HTML::link($getRandomUrl->shortened, "Random Link") }}
 	@endif
 @endsection

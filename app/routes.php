@@ -16,6 +16,6 @@ Route::post('/', 'UrlController@postIndex');
 Route::get('{any}', 'UrlController@getLink');
 
 App::bind(
-	'lib\UrlModelInterface',
-	'lib\EloquentModelUrl'
+	'Library\Interfaces\UrlModelInterface',
+	'Library\Repositories\EloquentModelUrl'
 );

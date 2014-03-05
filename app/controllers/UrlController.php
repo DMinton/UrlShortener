@@ -1,33 +1,17 @@
 <?php
 
-use lib\EloquentModelUrl;
+use Library\Interfaces\UrlModelInterface as UrlModel;
+use Library\Helpers\Helpers as Helpers;
 
 class UrlController extends BaseController {
 
-    public function __construct(EloquentModelUrl $url) {
+    public function __construct(UrlModel $url) {
         $this->url = $url;
-    }
-
-    protected function get_top_sites(){
-        $topcount = $this->url->getTopSites();
-        return $topcount;
-    }
-
-    protected function get_random_url(){
-
-    	$number = $this->url->getCount();
-    	if($number > 0){
-         $random = mt_rand(1,$number);
-         $randomurl = $this->url->findRandomUrl($random);
-         return $randomurl;
-        }
     }
 
     public function getIndex(){
 
-        $randomurl = self::get_random_url();
-        $topcount = self::get_top_sites();
-        $data = array("randomurl" => $randomurl, "topcount" => $topcount);
+        $data = Helpers::getSiteDataAsArray($this->url);
         return View::make('index')->with($data);
     }
 
@@ -36,43 +20,31 @@ class UrlController extends BaseController {
         $url = Input::get('url');
 
             // URL validation
-        $validation = $this->url->validate(array('url' => $url ));
+        $validation = $this->url->validate($url);
 
         if($validation !== true){
             return Redirect::to('/')->withErrors($validation->messages());
         }
 
             // Checks if url is in table
-        $record = $this->url->getByUrl($url);
-        
-        if($record){
-            return View::make('result')->with('shortened', $record);
-        }
+            // if not in table, ceates new url
+        $newUrl = $this->url->getByUrl($url);
 
-            // adds url to table and creates shortened url
-        $newurl = $this->url->make_short_url();
-        $save = $this->url->create(array(
-            'url' => $url,
-            'shortened' => $newurl
-            ));
-        $save->count = 0;
-
-            // return results
-        if($save){
-            return View::make('result')->with('shortened', $save);
+        if(is_null($newUrl)){
+            $newUrl = $this->url->createUrl($url);
         }
+        return View::make('result')->with('shortened', $newUrl);
     }
 
-    public function getLink($shortened){
-
-            // find query in database, increment, redirect if not found
-        $row = $this->url->getByUrl($shortened);
-
-        if(isset($row)){
-            $row->increment('count');
+    public function getLink($input){
+            // find query in database
+        $url = $this->url->getByShortened($input);
+        
+            // not found, redirect home
+        if( ! isset($url)){
+            return Redirect::to('/');
         }
-        else{ return Redirect::to('/'); }
-            // get url and redirect
-        return Redirect::to($row->url);
+            // increment and redirect
+        return $this->url->redirect($url);
     }
 }
