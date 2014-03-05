@@ -1,7 +1,9 @@
 <html>
 	<head>
+
 		<link href="assets/css/application.css" rel="stylesheet">
-		<title></title>
+
+		<title>Url Shortener</title>
 	</head>
 	<body>
 
