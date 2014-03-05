@@ -26,10 +26,9 @@ $app = new Illuminate\Foundation\Application;
 
 
 $env = $app->detectEnvironment(array(
-
-	'local' => array('localhost'),
-	'production' => array('urlshortener.eu1.frbit.net'),
-
+    'local' => array('david'),
+    'local' => array('David-HP'),
+    'production' => array('urlshortener.eu1.frbit.net'),
 ));
 
 /*

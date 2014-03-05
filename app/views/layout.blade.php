@@ -1,7 +1,6 @@
 <html>
 	<head>
-		{{ stylesheet_link_tag() }}
-	    {{ javascript_include_tag() }}
+		<link href="assets/css/application.css" rel="stylesheet">
 		<title></title>
 	</head>
 	<body>
