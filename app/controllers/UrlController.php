@@ -1,7 +1,8 @@
 <?php
 
-use Library\Interfaces\UrlModelInterface as UrlModel;
-use Library\Helpers\Helpers as Helpers;
+use Models\Interfaces\UrlModelInterface as UrlModel;
+use Helpers\Helpers as Helpers;
+use Helpers\Validation as Validator;
 
 class UrlController extends BaseController {
 
@@ -20,7 +21,7 @@ class UrlController extends BaseController {
         $url = Input::get('url');
 
             // URL validation
-        $validation = $this->url->validate($url);
+        $validation = Validator::validate($url, $this->url->getRules());
 
         if($validation !== true){
             return Redirect::to('/')->withErrors($validation->messages());
@@ -45,6 +46,7 @@ class UrlController extends BaseController {
             return Redirect::to('/');
         }
             // increment and redirect
-        return $this->url->redirect($url);
+        $url->increment('count');
+        return Redirect::to($url->url);
     }
 }

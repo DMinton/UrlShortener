@@ -1,8 +1,8 @@
-<?php namespace Library\Repositories;
+<?php namespace Models\Repositories;
 
-use Library\Interfaces\UrlModelInterface;
-use Library\Helpers\Helpers;
-use Url, Validator, Redirect;
+use Models\Interfaces\UrlModelInterface;
+use Helpers\Helpers;
+use Url;
 
 class EloquentModelUrl implements UrlModelInterface {
 
@@ -22,9 +22,8 @@ class EloquentModelUrl implements UrlModelInterface {
 					->get();
 	}
 
-	public function redirect($url) {
-		$url->increment('count');
-		return Redirect::to($url->url);
+	public function getRules() {
+		return Url::$rules;
 	}
 
 	public function getCount() {
@@ -56,12 +55,5 @@ class EloquentModelUrl implements UrlModelInterface {
             );
 
 		return Url::create($data);
-	}
-
-	public static function validate($input){
-		$data = array('url' => $input );
-		$v = Validator::make($data ,Url::$rules);
-		if($v->fails()){ return $v; }
-		else { return true; }
 	}
 }

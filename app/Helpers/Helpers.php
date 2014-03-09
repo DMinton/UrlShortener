@@ -1,4 +1,4 @@
-<?php namespace Library\Helpers;
+<?php namespace Helpers;
 
 class Helpers {
 

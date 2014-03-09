@@ -70,4 +70,16 @@ require $framework.'/Illuminate/Foundation/start.php';
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Bindings
+|--------------------------------------------------------------------------
+|
+*/
+
+App::bind(
+	'Models\Interfaces\UrlModelInterface',
+	'Models\Repositories\EloquentModelUrl'
+);
+
 return $app;

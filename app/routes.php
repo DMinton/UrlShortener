@@ -14,8 +14,3 @@
 Route::get('/', 'UrlController@getIndex');
 Route::post('/', 'UrlController@postIndex');
 Route::get('{any}', 'UrlController@getLink');
-
-App::bind(
-	'Library\Interfaces\UrlModelInterface',
-	'Library\Repositories\EloquentModelUrl'
-);
