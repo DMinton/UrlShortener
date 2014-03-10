@@ -61,17 +61,6 @@ require $framework.'/Illuminate/Foundation/start.php';
 
 /*
 |--------------------------------------------------------------------------
-| Return The Application
-|--------------------------------------------------------------------------
-|
-| This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
-| from the actual running of the application and sending responses.
-|
-*/
-
-/*
-|--------------------------------------------------------------------------
 | Bindings
 |--------------------------------------------------------------------------
 |
@@ -81,5 +70,16 @@ App::bind(
 	'Models\Interfaces\UrlModelInterface',
 	'Models\Repositories\EloquentModelUrl'
 );
+
+/*
+|--------------------------------------------------------------------------
+| Return The Application
+|--------------------------------------------------------------------------
+|
+| This script returns the application instance. The instance is given to
+| the calling script so we can separate the building of the instances
+| from the actual running of the application and sending responses.
+|
+*/
 
 return $app;
